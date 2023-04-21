@@ -31,6 +31,26 @@ methods.GET = async (req) => {
     }
 };
 
+methods.DELETE = async (req) => {
+    const path = urlPath(req.url);
+    let stats;
+
+    try{
+        stats = await fs.promises.stat(path);
+    }catch(err){
+        if(err.code!="ENOENT") throw err;
+        else return{
+            status: 204
+        }
+    }
+
+    if(stats.isDirectory()) await fs.promises.rmdir(path);
+    else await fs.promises.unlink(path);
+
+    return {
+        status: 204
+    }
+}
 
 
 
