@@ -1,6 +1,8 @@
 const fs = require('fs');
 const urlPath = require('./utils/urlPath');
-const mime = require('mime')
+const mime = require('mime');
+const pipeStream = require('./utils/pipeStream');
+
 const methods = Object.create(null);
 
 // GET: returns list of files if reading dir, else file contents
@@ -53,7 +55,11 @@ methods.DELETE = async (req) => {
 }
 
 methods.PUT = async (req) => {
-    
+    const path = urlPath(req.url);
+    await pipeStream(req, fs.createWriteStream(path))
+    return {
+        status: 204 
+    }
 }
 
 
