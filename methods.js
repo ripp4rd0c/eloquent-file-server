@@ -52,6 +52,9 @@ methods.DELETE = async (req) => {
     }
 }
 
+methods.PUT = async (req) => {
+    
+}
 
 
 
