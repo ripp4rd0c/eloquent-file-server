@@ -17,7 +17,7 @@ http.createServer((req, res) => {
             'content-type': type
         })
         // body
-        if(body.pipe && body) body.pipe(res);
+        if(body && body.pipe) body.pipe(res);
         else res.end(body);
     })
 
