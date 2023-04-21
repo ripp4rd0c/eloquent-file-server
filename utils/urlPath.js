@@ -2,14 +2,14 @@ const path = require('path');
 const url = require('url');
 
 const baseDir = process.cwd();
-console.log(baseDir);
+console.log("base_dir: ", baseDir);
 
 function getPath(urlPath){
     const pathName = url.parse(urlPath).pathname;
     const finalPath = path.resolve(decodeURIComponent(pathName).slice(1));
 
-    if(finalPath != baseDir+path.sep && !finalPath.startsWith(baseDir)){
-        return {
+    if(finalPath != baseDir && !finalPath.startsWith(baseDir+path.sep)){
+        throw {
             status: 403,
             body: "forbidden"
         }

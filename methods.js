@@ -20,7 +20,7 @@ methods.GET = async (req) => {
 
     if (stats.isDirectory()){
         return{
-            body: (await fs.readdir(path)).join("\n")
+            body: (await fs.promises.readdir(path)).join("\n")
         }
     }
     else{
